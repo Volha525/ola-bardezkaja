@@ -39,34 +39,6 @@ namespace Trello
 
 			Console.WriteLine("\n****************************\n");
 
-			Console.WriteLine($"Все карточки статуса: {StatusTypes.OnStudent} ");
-			PrintCards(desk1.GetCardsWithStatus(StatusTypes.OnStudent));
-			Console.WriteLine($"Все карточки студента {ruslan} : ");
-			PrintCards(desk2.GetUserCards(ruslan));
-			Console.WriteLine("\n****************************\n");
-
-			Console.WriteLine("\n****************************\n");
-
-			deskManager.ShowAllDesks();
-
-			if (card1.IsCardInTime())
-			{
-				Console.WriteLine($"Карточка  {card1} выполнена вовремя");
-			}
-			else
-			{
-				Console.WriteLine($"Карточка  {card1} просрочена");
-			}
-
-			Console.WriteLine("\n****************************\n");
-
-			desk1.ShowBadStudents();
-			desk2.ShowBadStudents();
-
-			Console.WriteLine("\n****************************\n");
-
-			PrintAllUserCards(deskManager, userManager);
-
 			Console.WriteLine("\n**************DemonstrateExceptions**************\n");
 
 			DemonstrateExceptions(deskManager);
@@ -75,6 +47,8 @@ namespace Trello
 
 			string serializedManager = SerializeDeskManager(deskManager);
 			Console.WriteLine(serializedManager);
+			
+			File.WriteAllText("serializedCard.json", serializedManager);
 
 			Console.WriteLine("\n**************DeserializeDeskManager**************\n");
 
@@ -84,7 +58,9 @@ namespace Trello
 
 			serializedManager = serializedManager.Replace("{", "(");
 			DeskManager deserializedManager2 = DeserializeDeskManager(serializedManager);
-		
+			
+		        File.ReadAllText("deserializedCard.json");
+			
 			Console.ReadLine();
 		}
 
